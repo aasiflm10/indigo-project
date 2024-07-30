@@ -13,7 +13,7 @@ This project consists of three main folders:
 
 ### Backend
 - **Node.js**
-- **TypeScript**
+- **JavaScript**
 - **Express**
 - **Firebase Cloud Messaging**: For sending in-app notifications.
 - **Twilio**: For sending SMS.
