@@ -61,4 +61,35 @@ The `serviceAccountKey.json` file can be obtained from the Firebase console. Thi
     npm install
     npm run dev
 
+# Case Study Solution
+
+## Description
+Develop a system to provide real-time flight status updates and notifications to passengers.
+
+## Features
+- **Real-time Updates**: Display current flight status (delays, cancellations, gate changes).
+- **Push Notifications**: Send notifications for flight status changes via SMS, email, or app notifications.
+- **Create and Update Flight API**: Pull data from  databases for accurate information and update flights.
+
+## Technologies Used
+- **Frontend**: HTML, CSS, React.js, Tailwindcss.
+- **Backend**: Node.js, TypeScript, Express.
+- **Database**: PostgreSQL, Prisma.
+- **Notifications**: Firebase Cloud Messaging for in-app notifications, Twilio for SMS, Nodemailer for emails.
+
+## Implementation Details
+
+### Backend
+- **Real-time Updates**: The backend provides endpoints to create, update, and fetch flight details. Real-time status updates are handled through these endpoints.
+- **Push Notifications**: Notifications are sent using Firebase Cloud Messaging for in-app notifications, Twilio for SMS, and Nodemailer for email notifications. Kafka or RabbitMQ can be integrated for message brokering to handle high-throughput notifications, but this project uses Firebase Cloud Messaging for simplicity.
+- **Integration with Airport Systems**: Developed backend API to create or update the flight and fetch real time flight details from the backend.
+
+### Frontend
+- **User Frontend**: Developed using React.js and styled with Tailwind CSS. It fetches flight details and displays real-time updates. It also receives notifications through Firebase Cloud Messaging.
+- **Admin Frontend**: Also developed using React.js and styled with Tailwind CSS. It provides functionalities to create and update flight details. When you update the flight details you can send notification to the user via SMS, EMail or InApp notifications.
+
+## Summary
+This project demonstrates a full-stack application with backend routes for managing flight data and sending notifications, along with user and admin frontends built with React and styled with Tailwind CSS. The backend leverages Firebase Cloud Messaging for in-app notifications, Twilio for SMS, and Nodemailer for email notifications, with PostgreSQL and Prisma managing the database.
+
+Thank you for reviewing my submission for Hack to Hire 2024!
 
