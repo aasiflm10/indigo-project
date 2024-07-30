@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyDaEPV62t9dN16jsBhtlRSX5b9HJ9lQoB4",
   authDomain: "indigo-notify.firebaseapp.com",
@@ -11,9 +12,9 @@ const firebaseConfig = {
   appId: "1:302344112773:web:222fc73f46e60dc35c37ec",
   measurementId: "G-E7Z0ZEPVBK"
 };
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Cloud Messaging
 

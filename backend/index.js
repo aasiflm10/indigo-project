@@ -79,6 +79,39 @@ app.post("/add-Data", async (req, res) => {
   }
 });
 
+app.get('/flight/:id', async (req,res) => {
+    
+  const id = req.params.id
+
+  try {
+    const flight = await prisma.flight.findUnique({
+      where: {
+         id:id
+      },select:{
+        flightId: true,
+        airline: true,
+       status: true,
+       departureGate: true,
+       arrivalGate: true,
+       scheduledDeparture: true,
+       scheduledArrival: true,
+       actualDeparture: true,
+       actualArrival: true,
+      }
+    });
+   if(flight){
+      return res.json({flight})
+   }else{
+      res.status(400).json({error:'FLight not found'})
+   }
+  } catch (e) {
+    console.error('Error fetching flight data:', e);
+    res.status(500);
+    return res.json({ error: 'Error fetching flight data', details: e.message });
+  }
+});
+
+
 // Fetch Flight Endpoint
 app.get("/find-my-flight/:id", async (req, res) => {
   const body = req.body;
@@ -118,6 +151,32 @@ app.get("/find-my-flight/:id", async (req, res) => {
     });
   }
 });
+
+
+app.post('/flight-check', async (req,res) => {
+
+  const body = await req.body;
+
+  try {
+    const flight = await prisma.flight.findFirst({
+      where: {
+        flightId: body.flightId,
+      },
+    });
+
+    if (!flight) {
+      console.log('Flight not found for ID:', body.flightId);
+      res.status(404);
+      return res.json({ error: 'Flight not found' });
+    }
+
+    return res.json(flight);
+  } catch (e) {
+    console.error('Error fetching flight data:', e);
+    res.status(500);
+    return res.json({ error: 'Error fetching flight data', details: e.message });
+  }
+})
 
 app.post('/flightUpdate', async (req, res) => {
   const { flightId, status, departureGate, arrivalGate, scheduledDeparture, scheduledArrival, actualDeparture, actualArrival } = req.body;
