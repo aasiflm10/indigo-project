@@ -239,7 +239,7 @@ app.post("/notification", async (req, res) => {
         flightId: flight.id,
         message,
         timestamp: new Date().toISOString(),
-        method: getRandomMethod(methods),
+        method: "SMS",
         recipient: "Hardcoded_value",
       },
     });
@@ -253,8 +253,8 @@ app.post("/notification", async (req, res) => {
         host: "smtp.ethereal.email",
         port: 587,
         auth: {
-          user: 'genevieve74@ethereal.email',
-          pass: 'eF5SjMs67uHqaJ5aJT'
+          user: 'emery.marks@ethereal.email',
+          pass: 'm8mCX1ae8dVN2DsDHd'
         },
       });
 
