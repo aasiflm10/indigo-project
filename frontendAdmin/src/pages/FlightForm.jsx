@@ -8,11 +8,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const FlightDetailsForm = () => {
-  const [flightName, setFlightName] = useState("");
-  const [flightNumber, setFlightNumber] = useState("");
+  const [flightId, setFlightId] = useState("");
   const [status, setStatus] = useState("");
-  const [gateNumber, setGateNumber] = useState("");
-  const [informUsing, setInformUsing] = useState("");
+  const [departureGate, setDepartureGate] = useState("");
+  const [arrivalGate, setArrivalGate] = useState("");
+  const [scheduledDeparture, setScheduledDeparture] = useState("");
+  const [scheduledArrival, setScheduledArrival] = useState("");
   const [notification, setNotification] = useState({ visible: false, message: "", success: false });
 
   const navigate = useNavigate(); 
@@ -32,65 +33,67 @@ export const FlightDetailsForm = () => {
           <SubHeading label={"Enter flight information"} />
           <InputBox
             onChange={(e) => {
-              setFlightName(e.target.value);
+              setFlightId(e.target.value);
             }}
-            placeholder="Flight Name"
-            label={"Flight Name"}
-          />
-          <InputBox
-            onChange={(e) => {
-              setFlightNumber(e.target.value);
-            }}
-            placeholder="Flight Number"
-            label={"Flight Number"}
+            placeholder="6E2094"
+            label={"Flight Id"}
           />
           <InputBox
             onChange={(e) => {
               setStatus(e.target.value);
             }}
-            placeholder="Status"
+            placeholder="On Time"
             label={"Status"}
           />
           <InputBox
             onChange={(e) => {
-              setGateNumber(e.target.value);
+              setDepartureGate(e.target.value);
             }}
-            placeholder="Gate Number"
-            label={"Gate Number"}
+            placeholder="A56"
+            label={"Departure Gate"}
           />
-          <div className="text-left mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Inform Using
-            </label>
-            <select
-              onChange={(e) => {
-                setInformUsing(e.target.value);
-              }}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            >
-              <option value="">Select method</option>
-              <option value="SMS">SMS</option>
-              <option value="Email">Email</option>
-            </select>
-          </div>
+          <InputBox
+            onChange={(e) => {
+              setArrivalGate(e.target.value);
+            }}
+            placeholder="A43"
+            label={"Arrival Gate"}
+          />
+          <InputBox
+            onChange={(e) => {
+              setScheduledDeparture(e.target.value);
+            }}
+            placeholder="Scheduled Departure"
+            label={"Scheduled Departure"}
+            type="datetime-local"
+          />
+          <InputBox
+            onChange={(e) => {
+              setScheduledArrival(e.target.value);
+            }}
+            placeholder="Scheduled Arrival"
+            label={"Scheduled Arrival"}
+            type="datetime-local"
+          />
           <div className="pt-4">
             <Button
               onClick={async () => {
                 const requestData = {
-                  flightName,
-                  flightNumber,
+                  flightId,
                   status,
-                  gateNumber,
-                  informUsing,
+                  departureGate,
+                  arrivalGate,
+                  scheduledDeparture,
+                  scheduledArrival,
                   notification: {
                     title: "Flight Notification",
-                    body: `Flight ${flightName} (${flightNumber}) is ${status} at gate ${gateNumber}. Please check your ${informUsing}.`
+                    body: `Flight ${flightId} is ${status}. Departure Gate: ${departureGate}, Arrival Gate: ${arrivalGate}. Scheduled Departure: ${scheduledDeparture}, Scheduled Arrival: ${scheduledArrival}.`
                   }
                 };
 
                 try {
                   const response = await axios.post(
-                    "http://localhost:3000/send-notification",
+                    "http://localhost:3000/flightUpdate", // Updated endpoint
                     requestData
                   );
 
